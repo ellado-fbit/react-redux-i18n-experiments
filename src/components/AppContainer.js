@@ -12,9 +12,7 @@ class AppContainer extends React.Component {
   render() {
     return (
       <main>
-        <div>&nbsp;Current language: {this.props.lang}</div>
-        <div>&nbsp;Current translations: {JSON.stringify(this.props.transaltions)}</div>
-        <br />
+        <div style={{ marginLeft: '10px' }}>Current language: {this.props.lang}</div>
         <div style={{ marginLeft: '10px' }}>{this.context.t('_enero_')}</div>
         <div style={{ marginLeft: '10px' }}>{this.context.t('_febrero_')}</div>
         <div style={{ marginLeft: '10px' }}>{this.context.t('_marzo_')}</div>
@@ -24,10 +22,12 @@ class AppContainer extends React.Component {
         <br />
         <button
           style={{ marginLeft: '10px' }}
-          onClick={() => { this.changeLanguage(this.props.lang === 'es'? 'en' : 'es') }}
-        >
+          onClick={() => { this.changeLanguage(this.props.lang === 'es' ? 'en' : 'es') }}
+          >
           Change language
         </button>
+        <br /><br />
+        <div style={{ marginLeft: '10px' }}>Current translations: {JSON.stringify(this.props.transaltions)}</div>
       </main>
     )
   }
