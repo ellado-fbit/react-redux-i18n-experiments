@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from "react-redux"
-import { setLanguage } from 'redux-i18n'
+import { setLanguage } from 'redux-i18n/immutable'
+import { setTranslations } from 'redux-i18n'
 import PropTypes from 'prop-types'
 
 class AppContainer extends React.Component {
@@ -9,25 +10,42 @@ class AppContainer extends React.Component {
     this.props.dispatch(setLanguage(lang))
   }
 
+  addTranslationHello = () => {
+    const newTranslation = {
+      es: { _hello_: 'hola' },
+      en: { _hello_: 'hello' }
+    }
+    setTimeout(() => {
+      this.props.dispatch(setTranslations(newTranslation, { preserveExisting: true }))
+    }, 500)
+  }
+
+  addTranslationBye = () => {
+    const newTranslation = {
+      es: { _bye_: 'adiós' },
+      en: { _bye_: 'bye' }
+    }
+    setTimeout(() => {
+      this.props.dispatch(setTranslations(newTranslation, { preserveExisting: true }))
+    }, 500)
+  }
+
   render() {
     return (
-      <main>
-        <div style={{ marginLeft: '10px' }}>Current language: {this.props.lang}</div>
-        <div style={{ marginLeft: '10px' }}>{this.context.t('_enero_')}</div>
-        <div style={{ marginLeft: '10px' }}>{this.context.t('_febrero_')}</div>
-        <div style={{ marginLeft: '10px' }}>{this.context.t('_marzo_')}</div>
-        <div style={{ marginLeft: '10px' }}>{this.context.t('_abril_')}</div>
-        <div style={{ marginLeft: '10px' }}>{this.context.t('_mayo_')}</div>
-        <div style={{ marginLeft: '10px' }}>{this.context.t('_junio_')}</div>
-        <br />
-        <button
-          style={{ marginLeft: '10px' }}
-          onClick={() => { this.changeLanguage(this.props.lang === 'es' ? 'en' : 'es') }}
-          >
-          Change language
-        </button>
+      <main style={{ padding: '10px' }}>
+        <div>Current language: {this.props.lang}</div>
+        <div>{this.context.t('_enero_')}</div>
+        <div>{this.context.t('_febrero_')}</div>
+        <div>{this.context.t('_marzo_')}</div>
+        <div>{this.context.t('_abril_')}</div>
+        <div>{this.context.t('_mayo_')}</div>
+        <div>{this.context.t('_junio_')}</div>
+        <button onClick={() => { this.changeLanguage(this.props.lang === 'es' ? 'en' : 'es') }}>Change language</button>
         <br /><br />
-        <div style={{ marginLeft: '10px' }}>Current translations: {JSON.stringify(this.props.transaltions)}</div>
+        <div>Current translations: {JSON.stringify(this.props.translations)}</div>
+        <button onClick={() => { this.addTranslationHello() }}>Add translation _hello_</button>
+        <br />
+        <button onClick={() => { this.addTranslationBye() }}>Add translation _bye_</button>
       </main>
     )
   }

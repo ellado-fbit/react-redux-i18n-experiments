@@ -18,7 +18,12 @@ const store = createStore(rootReducer, applyMiddleware(thunk))
 export const App = () => {
   return (
     <Provider store={store}>
-      <I18n translations={translations} initialLang={'es'} fallbackLang={'en'}>
+      <I18n
+        translations={translations}
+        initialLang={'es'}
+        fallbackLang={'en'}
+        useReducer={false}
+      >
         <AppContainer />
         {/* <AppContainerHook /> */}
       </I18n>
