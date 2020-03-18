@@ -1,8 +1,14 @@
 import React from 'react'
 import { connect } from "react-redux"
+import { setLanguage } from 'redux-i18n'
 import PropTypes from 'prop-types'
 
 class AppContainer extends React.Component {
+
+  changeLanguage = (lang) => {
+    this.props.dispatch(setLanguage(lang))
+  }
+
   render() {
     return (
       <main>
@@ -15,7 +21,13 @@ class AppContainer extends React.Component {
         <div style={{ marginLeft: '10px' }}>{this.context.t('_abril_')}</div>
         <div style={{ marginLeft: '10px' }}>{this.context.t('_mayo_')}</div>
         <div style={{ marginLeft: '10px' }}>{this.context.t('_junio_')}</div>
-        <div style={{ marginLeft: '10px' }}>{this.context.t('_julio_')}</div>
+        <br />
+        <button
+          style={{ marginLeft: '10px' }}
+          onClick={() => { this.changeLanguage(this.props.lang === 'es'? 'en' : 'es') }}
+        >
+          Change language
+        </button>
       </main>
     )
   }
