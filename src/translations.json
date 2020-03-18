@@ -1,0 +1,17 @@
+{
+  "es": {
+    "_enero_": "enero",
+    "_febrero_": "febrero",
+    "_marzo_": "marzo",
+    "_abril_": "abril",
+    "_mayo_": "mayo"
+  },
+  "en": {
+    "_enero_": "january",
+    "_febrero_": "february",
+    "_marzo_": "march",
+    "_abril_": "april",
+    "_mayo_": "may",
+    "_junio_": "june"
+  }
+}
