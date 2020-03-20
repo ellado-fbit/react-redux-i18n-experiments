@@ -13,7 +13,7 @@ class AppContainer extends React.Component {
   addTranslationHello = () => {
     const newTranslation = {
       es: { _hello_: 'hola' },
-      en: { _hello_: 'hello' }
+      en: { _hello_: 'Hello' }
     }
     setTimeout(() => {
       this.props.dispatch(setTranslations(newTranslation, { preserveExisting: true }))
@@ -23,7 +23,7 @@ class AppContainer extends React.Component {
   addTranslationBye = () => {
     const newTranslation = {
       es: { _bye_: 'adiós' },
-      en: { _bye_: 'bye' }
+      en: { _bye_: 'Bye' }
     }
     setTimeout(() => {
       this.props.dispatch(setTranslations(newTranslation, { preserveExisting: true }))
@@ -33,19 +33,31 @@ class AppContainer extends React.Component {
   render() {
     return (
       <main style={{ padding: '10px' }}>
-        <div>Current language: {this.props.lang}</div>
+        <div><span style={{ textDecoration: 'underline' }}>Current language:</span> {this.props.lang}</div>
+        <button style={{ marginTop: '7px' }} onClick={() => { this.changeLanguage(this.props.lang === 'es' ? 'en' : 'es') }}>Change language</button>
+        <br /><br />
+        <div><span style={{ textDecoration: 'underline' }}>Current context:</span></div>
         <div>{this.context.t('_enero_')}</div>
         <div>{this.context.t('_febrero_')}</div>
         <div>{this.context.t('_marzo_')}</div>
         <div>{this.context.t('_abril_')}</div>
         <div>{this.context.t('_mayo_')}</div>
         <div>{this.context.t('_junio_')}</div>
-        <button onClick={() => { this.changeLanguage(this.props.lang === 'es' ? 'en' : 'es') }}>Change language</button>
         <br /><br />
-        <div>Current translations: {JSON.stringify(this.props.translations)}</div>
-        <button onClick={() => { this.addTranslationHello() }}>Add translation _hello_</button>
+        <div><span style={{ textDecoration: 'underline' }}>Current translations:</span> {JSON.stringify(this.props.translations)}</div>
+        <div>{
+          this.props.translations[this.props.lang] &&
+          this.props.translations[this.props.lang]['_hello_']
+          }
+        </div>
+        <div>{
+          this.props.translations[this.props.lang] &&
+          this.props.translations[this.props.lang]['_bye_']
+          }
+        </div>
+        <button style={{ marginTop: '7px' }} onClick={() => { this.addTranslationHello() }}>Add translation _hello_</button>
         <br />
-        <button onClick={() => { this.addTranslationBye() }}>Add translation _bye_</button>
+        <button style={{ marginTop: '7px' }} onClick={() => { this.addTranslationBye() }}>Add translation _bye_</button>
       </main>
     )
   }
